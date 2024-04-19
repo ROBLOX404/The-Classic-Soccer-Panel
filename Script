@@ -1,0 +1,237 @@
+--[[
+
+	🇱🇹 Script was made by FirePalmMy 🇱🇹
+	
+	The Classic Soccer script
+	
+	Script function: Glitch ball into sky on touch
+	
+	Enjoy 😊
+	
+]]--
+
+
+print("Script Executed")
+
+local plr = game.Players.LocalPlayer
+
+if plr.PlayerGui:FindFirstChild("Exploit board") then
+  plr.PlayerGui:FindFirstChild("Exploit board"):Destroy()
+end
+  
+local UI = Instance.new("ScreenGui",plr.PlayerGui)
+UI.ResetOnSpawn = false
+UI.Name = "Exploit board"
+local MainFrame = Instance.new("Frame",UI)
+MainFrame.Size = UDim2.new(0, 400,0, 250)
+MainFrame.Position = UDim2.new(0.5,0,0.5,0)
+MainFrame.AnchorPoint = Vector2.new(0.5,0.5)
+MainFrame.BackgroundColor3 = Color3.fromRGB(42,42,42)
+local TopBar = Instance.new("Frame",MainFrame)
+TopBar.Size = UDim2.new(1, 0,-0.06, 38)
+TopBar.BackgroundColor3 = Color3.fromRGB(32,32,32)
+local ballOwnedText = Instance.new("TextLabel",MainFrame)
+ballOwnedText.BackgroundColor3 = Color3.fromRGB(50,50,50)
+ballOwnedText.Position = UDim2.new(0,10,0,30)
+ballOwnedText.Size = UDim2.new(0,380,0,65)
+ballOwnedText.Text = "Ball is owned: false"
+ballOwnedText.TextColor3 = Color3.fromRGB(255,255,255)
+local glitchBall = Instance.new("TextButton",MainFrame)
+glitchBall.BackgroundColor3 = Color3.fromRGB(20,20,20)
+glitchBall.AutoButtonColor = false
+glitchBall.Position = UDim2.new(0,10,0,210)
+glitchBall.Size = UDim2.new(0,380,0,30)
+glitchBall.Text = "Glitch Ball: Disabled"
+glitchBall.TextColor3 = Color3.fromRGB(255,255,255)
+local AutoReach = Instance.new("TextButton",MainFrame)
+AutoReach.BackgroundColor3 = Color3.fromRGB(20,20,20)
+AutoReach.AutoButtonColor = false
+AutoReach.Position = UDim2.new(0,10,0,173)
+AutoReach.Size = UDim2.new(0,380,0,30)
+AutoReach.Text = "AutoReach: Disabled"
+AutoReach.TextColor3 = Color3.fromRGB(255,255,255)
+local bringBall = Instance.new("TextButton",MainFrame)
+bringBall.BackgroundColor3 = Color3.fromRGB(20,20,20)
+bringBall.AutoButtonColor = false
+bringBall.Position = UDim2.new(0,10,0,137)
+bringBall.Size = UDim2.new(0,380,0,30)
+bringBall.Text = "Bring Ball"
+bringBall.TextColor3 = Color3.fromRGB(255,255,255)
+local scoreGoal = Instance.new("TextButton",MainFrame)
+scoreGoal.BackgroundColor3 = Color3.fromRGB(20,20,20)
+scoreGoal.AutoButtonColor = false
+scoreGoal.Position = UDim2.new(0,10,0,101)
+scoreGoal.Size = UDim2.new(0,380,0,30)
+scoreGoal.Text = "Score a Goal"
+scoreGoal.TextColor3 = Color3.fromRGB(255,255,255)
+local exitButton = Instance.new("ImageButton",TopBar)
+exitButton.AnchorPoint = Vector2.new(1,0)
+exitButton.AutoButtonColor = false
+exitButton.BackgroundTransparency = 1
+exitButton.Position = UDim2.new(1,0,0,0)
+exitButton.Size = UDim2.new(1,0,1,0)
+exitButton.Image = "rbxassetid://10002373478"
+exitButton.ImageColor3 = Color3.fromRGB(255,0,0)
+local aspectRatio = Instance.new("UIAspectRatioConstraint",exitButton)
+local title = Instance.new("TextLabel",TopBar)
+title.AnchorPoint = Vector2.new(1,0)
+title.BackgroundTransparency = 1
+title.Position = UDim2.new(1,0,0,0)
+title.Size = UDim2.new(1,-4,1,0)
+title.TextColor3 = Color3.fromRGB(255,255,255)
+title.TextXAlignment = Enum.TextXAlignment.Left
+title.Text = "🇱🇹 FirePalmMy's The Classic Soccer Panel"
+
+local dragging
+local dragInput
+local dragStart
+local startPos
+local glitching = false
+local reaching = false
+local playerHasBall = false
+
+
+-- Functions --
+
+local function update(input)
+	local delta = input.Position - dragStart
+	MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+local function getBall()
+local args = {
+    [1] = "NoobGlitch"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Client"):FireServer(unpack(args))
+
+local args = {
+    [1] = workspace:WaitForChild("TPS")
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("ChangeOwner"):FireServer(unpack(args))
+end
+
+local function checkForBall()
+	local ball = workspace:FindFirstChild("TPS")
+	if ball then
+		if ball.Owner.Value == plr.Name or ball.Owner.Value == plr or ball.Owner.Value == plr.Character then
+			ballOwnedText.Text = "Ball is owned: true"
+			return ball
+		else
+            getBall()
+			ballOwnedText.Text = "Ball is owned: false"
+		end
+	end
+end
+
+local function glitchBallFunction()
+	local ball = checkForBall()
+	if ball and glitching then
+		ball.Position = Vector3.new(0,30,0)
+		local bodyForce = ball:FindFirstChild("BodyForce")
+		if bodyForce then
+			bodyForce = Vector3.new(0,1000,0)
+			ball.Velocity = Vector3.new(0,0,0)
+		end
+	end
+end
+
+local function reachingFunction()
+    if reaching then
+       getBall()
+    end
+end
+
+local function bringBallFunction()
+	local ball = checkForBall()
+	if ball then
+		local char = plr.Character
+		if char then
+			local bodyForce = ball:FindFirstChild("BodyForce")
+			if bodyForce then
+				bodyForce = Vector3.new(0,0,0)
+				ball.Velocity = Vector3.new(0,0,0)
+			end
+			ball.CFrame = plr.Character.PrimaryPart.CFrame * CFrame.new(0,0,-5)
+		end
+	end
+end
+
+local function scoreGoalFunction()
+	local ball = checkForBall()
+	if ball then
+		if plr.Team == game.Teams["Home"] or plr.Team == game.Teams["-Home GK"] then
+			ball.Position = workspace.WorkspaceStadiumMap.Goal22.Position
+		else
+			ball.Position = workspace.WorkspaceStadiumMap.Goal11.Position
+		end
+	end
+end
+
+-- Script --
+
+TopBar.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+
+		dragStart = input.Position
+		startPos = MainFrame.Position
+
+		input.Changed:Connect(function()
+			if input.UserInputState == Enum.UserInputState.End then
+				dragging = false
+			end
+		end)
+	end
+end)
+
+exitButton.MouseButton1Down:Connect(function()
+	UI:Destroy()
+end)
+
+glitchBall.MouseButton1Down:Connect(function()
+	if glitching then
+		glitchBall.Text = "Glitch Ball: Disabled"
+	else
+		glitchBall.Text = "Glitch Ball: Enabled"
+	end
+	glitching = not glitching
+end)
+
+bringBall.MouseButton1Down:Connect(function()
+	getBall()
+	bringBallFunction()
+end)
+
+AutoReach.MouseButton1Down:Connect(function()
+	if reaching then
+		AutoReach.Text = "AutoReach: Disabled"
+	else
+		AutoReach.Text = "AutoReach: Enabled"
+	end
+	reaching = not reaching
+end)
+
+scoreGoal.MouseButton1Down:Connect(function()
+	getBall()
+	scoreGoalFunction()
+end)
+	
+TopBar.InputChanged:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+		dragInput = input
+	end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+	if input == dragInput and dragging then
+		update(input)
+	end
+end)
+
+game["RunService"].RenderStepped:Connect(function()
+	checkForBall()
+    reachingFunction()
+	glitchBallFunction()
+end)
