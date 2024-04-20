@@ -494,5 +494,8 @@ plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Changed:Connect(fun
 		-- Set the velocity of the sphere in the direction towards the target part
 		local speed = 150 -- Adjust this speed as needed
 		ball.Velocity = direction * speed
+		print('yay')
+	else
+		plr.PlayerScripts:FindFirstChild("NoobGlitch").Enabled = true
 	end
 end)
