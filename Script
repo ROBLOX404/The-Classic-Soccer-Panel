@@ -2,9 +2,7 @@
 
 	🇱🇹 Script was made by FirePalmMy 🇱🇹
 	
-	The Classic Soccer script
-	
-	Script function: Glitch ball into sky on touch
+	The Classic Soccer panel script
 	
 	Enjoy 😊
 	
@@ -13,74 +11,200 @@
 
 print("Script Executed")
 
+local tweenService = game:GetService("TweenService")
+
 local plr = game.Players.LocalPlayer
 
 if plr.PlayerGui:FindFirstChild("Exploit board") then
-  plr.PlayerGui:FindFirstChild("Exploit board"):Destroy()
+	plr.PlayerGui:FindFirstChild("Exploit board"):Destroy()
 end
-  
+
 local UI = Instance.new("ScreenGui",plr.PlayerGui)
 UI.ResetOnSpawn = false
 UI.Name = "Exploit board"
-local MainFrame = Instance.new("Frame",UI)
-MainFrame.Size = UDim2.new(0, 400,0, 250)
-MainFrame.Position = UDim2.new(0.5,0,0.5,0)
-MainFrame.AnchorPoint = Vector2.new(0.5,0.5)
-MainFrame.BackgroundColor3 = Color3.fromRGB(42,42,42)
+local UIHolder = Instance.new("Frame",UI)
+UIHolder.Size = UDim2.new(0,425,0,275)
+UIHolder.Position = UDim2.new(0.5,0,0.5,0)
+UIHolder.AnchorPoint = Vector2.new(0.5,0.5)
+UIHolder.Transparency = 1
+local shadow = Instance.new("ImageLabel",UIHolder)
+shadow.Image = "rbxassetid://6015897843"
+shadow.Size = UDim2.new(1,47,1,47)
+shadow.ImageColor3 = Color3.fromRGB(32,32,32)
+shadow.ImageTransparency = 0.5
+shadow.Position = UDim2.new(0.5,0,0.5,0)
+shadow.AnchorPoint = Vector2.new(0.5,0.5)
+shadow.BackgroundTransparency = 1
+shadow.ScaleType = Enum.ScaleType.Slice
+shadow.SliceCenter = Rect.new(49,49,450,450)
+shadow.SliceScale = 1
+local MainFrame = Instance.new("Frame",UIHolder)
+MainFrame.BorderSizePixel = 0
+MainFrame.Size = UDim2.new(1,0,1,0)
+MainFrame.BorderSizePixel = 0
+MainFrame.BackgroundColor3 = Color3.fromRGB(32,32,32)
+MainFrame.ClipsDescendants = true
+local GlowEffect = Instance.new("ImageLabel",MainFrame)
+GlowEffect.BackgroundTransparency = 1
+GlowEffect.Image = "rbxassetid://93899371"
+GlowEffect.AnchorPoint = Vector2.new(0.5,0.5)
+GlowEffect.Position = UDim2.new(0.5,0,0)
+GlowEffect.Size = UDim2.new(1.9,0,1.9,0)
+GlowEffect.ImageColor3 = Color3.fromRGB(50,50,50)
 local TopBar = Instance.new("Frame",MainFrame)
-TopBar.Size = UDim2.new(1, 0,-0.06, 38)
-TopBar.BackgroundColor3 = Color3.fromRGB(32,32,32)
-local ballOwnedText = Instance.new("TextLabel",MainFrame)
-ballOwnedText.BackgroundColor3 = Color3.fromRGB(50,50,50)
-ballOwnedText.Position = UDim2.new(0,10,0,30)
-ballOwnedText.Size = UDim2.new(0,380,0,65)
-ballOwnedText.Text = "Ball is owned: false"
-ballOwnedText.TextColor3 = Color3.fromRGB(255,255,255)
-local glitchBall = Instance.new("TextButton",MainFrame)
-glitchBall.BackgroundColor3 = Color3.fromRGB(20,20,20)
-glitchBall.AutoButtonColor = false
-glitchBall.Position = UDim2.new(0,10,0,210)
-glitchBall.Size = UDim2.new(0,380,0,30)
-glitchBall.Text = "Glitch Ball: Disabled"
-glitchBall.TextColor3 = Color3.fromRGB(255,255,255)
-local AutoReach = Instance.new("TextButton",MainFrame)
-AutoReach.BackgroundColor3 = Color3.fromRGB(20,20,20)
-AutoReach.AutoButtonColor = false
-AutoReach.Position = UDim2.new(0,10,0,173)
-AutoReach.Size = UDim2.new(0,380,0,30)
-AutoReach.Text = "AutoReach: Disabled"
-AutoReach.TextColor3 = Color3.fromRGB(255,255,255)
-local bringBall = Instance.new("TextButton",MainFrame)
-bringBall.BackgroundColor3 = Color3.fromRGB(20,20,20)
-bringBall.AutoButtonColor = false
-bringBall.Position = UDim2.new(0,10,0,137)
-bringBall.Size = UDim2.new(0,380,0,30)
-bringBall.Text = "Bring Ball"
-bringBall.TextColor3 = Color3.fromRGB(255,255,255)
-local scoreGoal = Instance.new("TextButton",MainFrame)
-scoreGoal.BackgroundColor3 = Color3.fromRGB(20,20,20)
-scoreGoal.AutoButtonColor = false
-scoreGoal.Position = UDim2.new(0,10,0,101)
-scoreGoal.Size = UDim2.new(0,380,0,30)
-scoreGoal.Text = "Score a Goal"
-scoreGoal.TextColor3 = Color3.fromRGB(255,255,255)
+TopBar.Size = UDim2.new(1,0,0,30)
+TopBar.BorderSizePixel = 0
+TopBar.BackgroundColor3 = Color3.fromRGB(20,20,20)
 local exitButton = Instance.new("ImageButton",TopBar)
-exitButton.AnchorPoint = Vector2.new(1,0)
-exitButton.AutoButtonColor = false
 exitButton.BackgroundTransparency = 1
-exitButton.Position = UDim2.new(1,0,0,0)
+exitButton.AnchorPoint = Vector2.new(1,0.5)
+exitButton.Position = UDim2.new(1,0,0.5,0)
 exitButton.Size = UDim2.new(1,0,1,0)
 exitButton.Image = "rbxassetid://10002373478"
-exitButton.ImageColor3 = Color3.fromRGB(255,0,0)
 local aspectRatio = Instance.new("UIAspectRatioConstraint",exitButton)
+local imageHolder = Instance.new("Frame",TopBar)
+imageHolder.BackgroundTransparency = 1
+imageHolder.Size = UDim2.new(1,0,1,0)
+local aspectRatio = Instance.new("UIAspectRatioConstraint",imageHolder)
+local panelIcon = Instance.new("ImageLabel",imageHolder)
+panelIcon.BackgroundTransparency = 1
+panelIcon.Size = UDim2.new(0.8,0,0.8,0)
+panelIcon.AnchorPoint = Vector2.new(0.5,0.5)
+panelIcon.Position = UDim2.new(0.5,0,0.5,0)
+panelIcon.Image = "rbxassetid://3926305904"
+panelIcon.ImageColor3 = Color3.fromRGB(255,255,0)
+panelIcon.ImageRectOffset = Vector2.new(404,844)
+panelIcon.ImageRectSize = Vector2.new(36,36)
 local title = Instance.new("TextLabel",TopBar)
 title.AnchorPoint = Vector2.new(1,0)
 title.BackgroundTransparency = 1
 title.Position = UDim2.new(1,0,0,0)
-title.Size = UDim2.new(1,-4,1,0)
+title.Size = UDim2.new(1,-30,1,0)
+title.FontFace.Bold = true
+title.Font = Enum.Font.SourceSansBold
+title.Text = "Game Panel"
 title.TextColor3 = Color3.fromRGB(255,255,255)
+title.TextSize = 15
 title.TextXAlignment = Enum.TextXAlignment.Left
-title.Text = "🇱🇹 FirePalmMy's The Classic Soccer Panel"
+local sideBar = Instance.new("Frame",MainFrame)
+sideBar.BorderSizePixel = 0
+sideBar.Position = UDim2.new(0,0,0,30)
+sideBar.Size = UDim2.new(0,100,0,245)
+sideBar.BackgroundColor3 = Color3.fromRGB(30,30,30)
+local uilist = Instance.new("UIListLayout",sideBar)
+uilist.HorizontalAlignment = Enum.HorizontalAlignment.Center
+local controlButton = Instance.new("ImageButton",sideBar)
+controlButton.AutoButtonColor = false
+controlButton.BorderSizePixel = 0
+controlButton.BackgroundColor3 = Color3.fromRGB(50,50,50)
+controlButton.BackgroundTransparency = 1
+controlButton.Size = UDim2.new(1,0,0,30)
+local controlText = Instance.new("TextLabel",controlButton)
+controlText.BackgroundTransparency = 1
+controlText.Size = UDim2.new(1,0,0,30)
+controlText.Position = UDim2.new(0,8,0,0)
+controlText.Text = "Control"
+controlText.TextColor3 = Color3.fromRGB(255,255,255)
+controlText.TextSize = 15
+controlText.Font = Enum.Font.Arial
+controlText.TextXAlignment = Enum.TextXAlignment.Left
+local silentButton = Instance.new("ImageButton",sideBar)
+silentButton.AutoButtonColor = false
+silentButton.BorderSizePixel = 0
+silentButton.BackgroundColor3 = Color3.fromRGB(50,50,50)
+silentButton.BackgroundTransparency = 1
+silentButton.Size = UDim2.new(1,0,0,30)
+local silentText = Instance.new("TextLabel",silentButton)
+silentText.BackgroundTransparency = 1
+silentText.Size = UDim2.new(1,0,0,30)
+silentText.Position = UDim2.new(0,8,0,0)
+silentText.Text = "Silent"
+silentText.TextColor3 = Color3.fromRGB(255,255,255)
+silentText.TextSize = 15
+silentText.Font = Enum.Font.Arial
+silentText.TextXAlignment = Enum.TextXAlignment.Left
+local infoButton = Instance.new("ImageButton",sideBar)
+infoButton.AutoButtonColor = false
+infoButton.BorderSizePixel = 0
+infoButton.BackgroundColor3 = Color3.fromRGB(50,50,50)
+infoButton.BackgroundTransparency = 0
+infoButton.Size = UDim2.new(1,0,0,30)
+local infoText = Instance.new("TextLabel",infoButton)
+infoText.BackgroundTransparency = 1
+infoText.Size = UDim2.new(1,0,0,30)
+infoText.Position = UDim2.new(0,8,0,0)
+infoText.Text = "Info"
+infoText.TextColor3 = Color3.fromRGB(255,255,255)
+infoText.TextSize = 15
+infoText.Font = Enum.Font.Arial
+infoText.TextXAlignment = Enum.TextXAlignment.Left
+local infoTab = Instance.new("Frame",MainFrame)
+infoTab.BackgroundTransparency = 1
+infoTab.Position = UDim2.new(0.235,0,0.109,0)
+infoTab.Size = UDim2.new(0,325,0,245)
+infoTab.Visible = true
+local controlTab = Instance.new("Frame",MainFrame)
+controlTab.BackgroundTransparency = 1
+controlTab.Position = UDim2.new(0.235,0,0.109,0)
+controlTab.Size = UDim2.new(0,325,0,245)
+controlTab.Visible = false
+local silentTab = Instance.new("Frame",MainFrame)
+silentTab.BackgroundTransparency = 1
+silentTab.Position = UDim2.new(0.235,0,0.109,0)
+silentTab.Size = UDim2.new(0,325,0,245)
+silentTab.Visible = false
+local uipadding = Instance.new("UIPadding",silentTab)
+uipadding.PaddingTop = UDim.new(0,8)
+uipadding.PaddingLeft = UDim.new(0,8)
+uipadding.PaddingRight = UDim.new(0,8)
+uipadding.PaddingBottom = UDim.new(0,8)
+local uipadding = Instance.new("UIPadding",controlTab)
+uipadding.PaddingTop = UDim.new(0,8)
+uipadding.PaddingLeft = UDim.new(0,8)
+uipadding.PaddingRight = UDim.new(0,8)
+uipadding.PaddingBottom = UDim.new(0,8)
+local uilist = Instance.new("UIListLayout",silentTab)
+uilist.Padding = UDim.new(0,8)
+local uilist = Instance.new("UIListLayout",controlTab)
+uilist.Padding = UDim.new(0,8)
+local uilist = Instance.new("UIListLayout",infoTab)
+uilist.HorizontalAlignment = Enum.HorizontalAlignment.Center
+uilist.VerticalAlignment = Enum.VerticalAlignment.Center
+uilist.Padding = UDim.new(0,20)
+local cooltext = Instance.new("TextLabel",infoTab)
+cooltext.BackgroundColor3 = Color3.fromRGB(50,50,50)
+cooltext.BackgroundTransparency = 1
+cooltext.Size = UDim2.new(1,0,0,30)
+cooltext.Text = "🇱🇹 FirePalmMy's The Classic Soccer Panel"
+cooltext.TextColor3 = Color3.fromRGB(255,255,255)
+cooltext.TextSize = 20
+cooltext.Font = Enum.Font.SourceSans
+local cooltext = Instance.new("TextLabel",infoTab)
+cooltext.BackgroundColor3 = Color3.fromRGB(50,50,50)
+cooltext.BackgroundTransparency = 1
+cooltext.Size = UDim2.new(1,0,0,30)
+cooltext.Text = "Made on: 2024/04/20"
+cooltext.TextColor3 = Color3.fromRGB(255,255,255)
+cooltext.TextSize = 20
+cooltext.Font = Enum.Font.SourceSans
+local cooltext = Instance.new("TextLabel",infoTab)
+cooltext.BackgroundColor3 = Color3.fromRGB(50,50,50)
+cooltext.BackgroundTransparency = 1
+cooltext.Size = UDim2.new(1,0,0,30)
+cooltext.Text = "Version: V1.2"
+cooltext.TextColor3 = Color3.fromRGB(255,255,255)
+cooltext.TextSize = 20
+cooltext.Font = Enum.Font.SourceSans
+local cooltext = Instance.new("TextLabel",infoTab)
+cooltext.BackgroundColor3 = Color3.fromRGB(50,50,50)
+cooltext.BackgroundTransparency = 1
+cooltext.Size = UDim2.new(1,0,0,30)
+cooltext.Text = "Thanks for your support :D"
+cooltext.TextColor3 = Color3.fromRGB(255,255,255)
+cooltext.TextSize = 20
+cooltext.Font = Enum.Font.SourceSans
+local switch = Instance.new("Sound",workspace)
+switch.SoundId = "rbxassetid://9119720940"
 
 local dragging
 local dragInput
@@ -90,26 +214,25 @@ local glitching = false
 local reaching = false
 local playerHasBall = false
 
-
 -- Functions --
 
 local function update(input)
 	local delta = input.Position - dragStart
-	MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	UIHolder.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 end
 
 local function getBall()
-local args = {
-    [1] = "NoobGlitch"
-}
+	local args = {
+		[1] = "NoobGlitch"
+	}
 
-game:GetService("ReplicatedStorage"):WaitForChild("Client"):FireServer(unpack(args))
+	game:GetService("ReplicatedStorage"):WaitForChild("Client"):FireServer(unpack(args))
 
-local args = {
-    [1] = workspace:WaitForChild("TPS")
-}
+	local args = {
+		[1] = workspace:WaitForChild("TPS")
+	}
 
-game:GetService("ReplicatedStorage"):WaitForChild("ChangeOwner"):FireServer(unpack(args))
+	game:GetService("ReplicatedStorage"):WaitForChild("ChangeOwner"):FireServer(unpack(args))
 end
 
 local function checkForBall()
@@ -119,7 +242,7 @@ local function checkForBall()
 			ballOwnedText.Text = "Ball is owned: true"
 			return ball
 		else
-            getBall()
+			getBall()
 			ballOwnedText.Text = "Ball is owned: false"
 		end
 	end
@@ -138,9 +261,9 @@ local function glitchBallFunction()
 end
 
 local function reachingFunction()
-    if reaching then
-       getBall()
-    end
+	if reaching then
+		getBall()
+	end
 end
 
 local function bringBallFunction()
@@ -169,14 +292,115 @@ local function scoreGoalFunction()
 	end
 end
 
+local function createNewOption(parent,text,isButton)
+	local frame = Instance.new("Frame",parent)
+	frame.BackgroundColor3 = Color3.fromRGB(25,25,25)
+	frame.Size = UDim2.new(1,0,0,30)
+	frame.BorderSizePixel = 0
+	local uipadding = Instance.new("UIPadding",frame)
+	uipadding.PaddingTop = UDim.new(0,6)
+	uipadding.PaddingLeft = UDim.new(0,6)
+	uipadding.PaddingRight = UDim.new(0,6)
+	uipadding.PaddingBottom = UDim.new(0,6)
+	local textLabel = Instance.new("TextLabel",frame)
+	textLabel.BackgroundTransparency = 1
+	textLabel.Font = Enum.Font.SourceSansLight
+	textLabel.Text = text
+	textLabel.TextColor3 = Color3.fromRGB(255,255,255)
+	textLabel.TextScaled = true
+	textLabel.Size = UDim2.new(1,0,1,0)
+	textLabel.TextXAlignment = Enum.TextXAlignment.Left
+	if isButton then
+		local frame = Instance.new("TextButton",frame)
+		frame.AutoButtonColor = false
+		frame.AnchorPoint = Vector2.new(1,0)
+		frame.BackgroundColor3 = Color3.fromRGB(50,50,50)
+		frame.Position = UDim2.new(1,0,0,0)
+		frame.Size = UDim2.new(0,36,1,0)
+		frame.BorderSizePixel = 0
+		frame.Text = "Run"
+		frame.TextScaled = true
+		frame.TextColor3 = Color3.fromRGB(255,255,255)
+		frame.Font = Enum.Font.SourceSans
+		return frame
+	else
+		local frame = Instance.new("Frame",frame)
+		frame.AnchorPoint = Vector2.new(1,0)
+		frame.BackgroundColor3 = Color3.fromRGB(50,50,50)
+		frame.Position = UDim2.new(1,0,0,0)
+		frame.Size = UDim2.new(0,36,1,0)
+		frame.BorderSizePixel = 0
+		local frame = Instance.new("ImageButton",frame)
+		frame.Size = UDim2.new(1,0,1,0)
+		frame.BorderSizePixel = 0
+		frame.BackgroundColor3 = Color3.fromRGB(255,255,255)
+		frame.AutoButtonColor = false
+		local aspectRatio = Instance.new("UIAspectRatioConstraint",frame)
+		local enabled = false
+		frame.MouseButton1Down:Connect(function()
+			local speed = 0.2
+			if enabled then
+				switch.Pitch = 0.5
+				switch:Play()
+				tweenService:Create(frame,TweenInfo.new(speed),{AnchorPoint = Vector2.new(0,0)}):Play()
+				tweenService:Create(frame,TweenInfo.new(speed),{Position = UDim2.new(0,0,0,0)}):Play()
+			else
+				switch.Pitch = 1
+				switch:Play()
+				tweenService:Create(frame,TweenInfo.new(speed),{AnchorPoint = Vector2.new(1,0)}):Play()
+				tweenService:Create(frame,TweenInfo.new(speed),{Position = UDim2.new(1,0,0,0)}):Play()
+			end
+			enabled = not enabled
+		end)
+		return frame
+	end
+end
+
 -- Script --
+
+infoButton.MouseButton1Down:Connect(function()
+	controlTab.Visible = false
+	silentTab.Visible = false
+	infoTab.Visible = true
+	controlButton.BackgroundTransparency = 1
+	silentButton.BackgroundTransparency = 1
+	infoButton.BackgroundTransparency = 0
+end)
+
+silentButton.MouseButton1Down:Connect(function()
+	controlTab.Visible = false
+	silentTab.Visible = true
+	infoTab.Visible = false
+	controlButton.BackgroundTransparency = 1
+	silentButton.BackgroundTransparency = 0
+	infoButton.BackgroundTransparency = 1
+end)
+
+controlButton.MouseButton1Down:Connect(function()
+	controlTab.Visible = true
+	silentTab.Visible = false
+	infoTab.Visible = false
+	controlButton.BackgroundTransparency = 0
+	silentButton.BackgroundTransparency = 1
+	infoButton.BackgroundTransparency = 1
+end)
+
+local scoreGoal = createNewOption(controlTab,"Score a Goal",true)
+local bringBall = createNewOption(controlTab,"Bring the Ball",true)
+local TPBall = createNewOption(controlTab,"TP to the Ball",true)
+local hideBall = createNewOption(controlTab,"Hide the Ball",false)
+local autoScore = createNewOption(controlTab,"Goal Farm Mode",false)
+
+local autoReach = createNewOption(silentTab,"AutoReach",false)
+local autoAim = createNewOption(silentTab,"AutoAim (WIP)",false)
+local autoReach = createNewOption(silentTab,"AutoCatch (WIP)",false)
 
 TopBar.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 		dragging = true
 
 		dragStart = input.Position
-		startPos = MainFrame.Position
+		startPos = UIHolder.Position
 
 		input.Changed:Connect(function()
 			if input.UserInputState == Enum.UserInputState.End then
@@ -186,38 +410,6 @@ TopBar.InputBegan:Connect(function(input)
 	end
 end)
 
-exitButton.MouseButton1Down:Connect(function()
-	UI:Destroy()
-end)
-
-glitchBall.MouseButton1Down:Connect(function()
-	if glitching then
-		glitchBall.Text = "Glitch Ball: Disabled"
-	else
-		glitchBall.Text = "Glitch Ball: Enabled"
-	end
-	glitching = not glitching
-end)
-
-bringBall.MouseButton1Down:Connect(function()
-	getBall()
-	bringBallFunction()
-end)
-
-AutoReach.MouseButton1Down:Connect(function()
-	if reaching then
-		AutoReach.Text = "AutoReach: Disabled"
-	else
-		AutoReach.Text = "AutoReach: Enabled"
-	end
-	reaching = not reaching
-end)
-
-scoreGoal.MouseButton1Down:Connect(function()
-	getBall()
-	scoreGoalFunction()
-end)
-	
 TopBar.InputChanged:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
 		dragInput = input
@@ -230,8 +422,30 @@ game:GetService("UserInputService").InputChanged:Connect(function(input)
 	end
 end)
 
-game["RunService"].RenderStepped:Connect(function()
+exitButton.MouseButton1Down:Connect(function()
+	UI:Destroy()
+end)
+
+hideBall.MouseButton1Down:Connect(function()
+	glitching = not glitching
+end)
+
+bringBall.MouseButton1Down:Connect(function()
+	getBall()
+	bringBallFunction()
+end)
+
+autoReach.MouseButton1Down:Connect(function()
+	reaching = not reaching
+end)
+
+scoreGoal.MouseButton1Down:Connect(function()
+	getBall()
+	scoreGoalFunction()
+end)
+
+game["Run Service"].RenderStepped:Connect(function()
 	checkForBall()
-    reachingFunction()
+	reachingFunction()
 	glitchBallFunction()
 end)
