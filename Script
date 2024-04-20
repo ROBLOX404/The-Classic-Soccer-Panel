@@ -307,7 +307,7 @@ local function scoreGoalFunction()
 	end
 end
 
-local function autoScore()
+local function aimscore()
 	if goalFarmMode then
 		scoreGoalFunction()
 	end
@@ -511,7 +511,7 @@ loop = game["Run Service"].Heartbeat:Connect(function()
 	checkForBall()
 	reachingFunction()
 	glitchBallFunction()
-	autoScore()
+	aimscore()
 end)
 
 exitButton.MouseButton1Down:Connect(function()
