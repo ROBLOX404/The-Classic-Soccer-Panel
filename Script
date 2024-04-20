@@ -2,7 +2,9 @@
 
 	🇱🇹 Script was made by FirePalmMy 🇱🇹
 	
-	The Classic Soccer panel script
+	The Classic Soccer script
+	
+	Script function: Glitch ball into sky on touch
 	
 	Enjoy 😊
 	
@@ -169,7 +171,6 @@ local uilist = Instance.new("UIListLayout",controlTab)
 uilist.Padding = UDim.new(0,8)
 local uilist = Instance.new("UIListLayout",infoTab)
 uilist.HorizontalAlignment = Enum.HorizontalAlignment.Center
-uilist.VerticalAlignment = Enum.VerticalAlignment.Center
 uilist.Padding = UDim.new(0,20)
 local cooltext = Instance.new("TextLabel",infoTab)
 cooltext.BackgroundColor3 = Color3.fromRGB(50,50,50)
@@ -199,12 +200,23 @@ local cooltext = Instance.new("TextLabel",infoTab)
 cooltext.BackgroundColor3 = Color3.fromRGB(50,50,50)
 cooltext.BackgroundTransparency = 1
 cooltext.Size = UDim2.new(1,0,0,30)
-cooltext.Text = "Thanks for your support :D"
+cooltext.Text = [[If you want use the panel
+make sure "Ball owned" is checked]]
 cooltext.TextColor3 = Color3.fromRGB(255,255,255)
 cooltext.TextSize = 20
 cooltext.Font = Enum.Font.SourceSans
 local switch = Instance.new("Sound",workspace)
 switch.SoundId = "rbxassetid://9119720940"
+local bottomtext = Instance.new("TextLabel",MainFrame)
+bottomtext.Size = UDim2.new(1,0,0,30)
+bottomtext.AnchorPoint = Vector2.new(0,1)
+bottomtext.BorderSizePixel = 0
+bottomtext.BackgroundColor3 = Color3.fromRGB(40,40,40)
+bottomtext.Position = UDim2.new(0,0,1,0)
+bottomtext.Text = [[Ball is owned: ❌]]
+bottomtext.TextSize = 15
+bottomtext.TextColor3 = Color3.fromRGB(255,255,255)
+bottomtext.Font = Enum.Font.SourceSansBold
 
 local dragging
 local dragInput
@@ -239,11 +251,11 @@ local function checkForBall()
 	local ball = workspace:FindFirstChild("TPS")
 	if ball then
 		if ball.Owner.Value == plr.Name or ball.Owner.Value == plr or ball.Owner.Value == plr.Character then
-			ballOwnedText.Text = "Ball is owned: true"
+			bottomtext.Text = [[Ball is owned: ✅]]
 			return ball
 		else
 			getBall()
-			ballOwnedText.Text = "Ball is owned: false"
+			bottomtext.Text = [[Ball is owned: ❌]]
 		end
 	end
 end
