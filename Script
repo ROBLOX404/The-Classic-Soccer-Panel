@@ -313,6 +313,37 @@ local function autoScore()
 	end
 end
 
+local function aim()
+	local ball = checkForBall()
+	plr.PlayerScripts:FindFirstChild("NoobGlitch").Enabled = false
+	local random = math.random(1,4)
+	local direction
+	if plr.Team == game.Teams["Home"] or plr.Team == game.Teams["-Home GK"] then
+		if random == 1 then
+			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793, 372.3470153808594) - ball.Position).unit
+		elseif random == 2 then
+			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793+15, 372.3470153808594) - ball.Position).unit
+		elseif random == 3 then
+			direction = (Vector3.new(-34.215824127197266, -30.940921783447266, 373.9881896972656) - ball.Position).unit
+		elseif random == 4 then
+			direction = (Vector3.new(-34.215824127197266, -30.940921783447266+15, 373.9881896972656) - ball.Position).unit
+		end
+	else
+		if random == 1 then
+			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793, -188) - ball.Position).unit
+		elseif random == 2 then
+			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793+15, -188) - ball.Position).unit
+		elseif random == 3 then
+			direction = (Vector3.new(-34.215824127197266, -30.940921783447266, -188) - ball.Position).unit
+		elseif random == 4 then
+			direction = (Vector3.new(-34.215824127197266, -30.940921783447266+15, -188) - ball.Position).unit
+		end
+	end
+	-- Set the velocity of the sphere in the direction towards the target part
+	local speed = 100 -- Adjust this speed as needed
+	ball.Velocity = direction * speed
+end
+
 local function createNewOption(parent,text,isButton)
 	local frame = Instance.new("Frame",parent)
 	frame.BackgroundColor3 = Color3.fromRGB(25,25,25)
@@ -450,7 +481,6 @@ end)
 TPBall.MouseButton1Down:Connect(function()
 	local ball = checkForBall()
 	if ball then
-		print(ball)
 		plr.Character:SetPrimaryPartCFrame(CFrame.new(ball.Position+Vector3.new(0,5+2.5/2,0)))
 	end
 end)
@@ -491,24 +521,8 @@ end)
 
 plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Changed:Connect(function()
 	print("changed")
-	if plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Visible and autoAim and checkForBall() then
-		local ball = checkForBall()
-		plr.PlayerScripts:FindFirstChild("NoobGlitch").Enabled = false
-		local random = math.random(1,4)
-		local direction
-		if random == 1 then
-			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793, 372.3470153808594) - ball.Position).unit
-		elseif random == 2 then
-			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793+15, 372.3470153808594) - ball.Position).unit
-		elseif random == 3 then
-			direction = (Vector3.new(-34.215824127197266, -30.940921783447266, 373.9881896972656) - ball.Position).unit
-		elseif random == 4 then
-			direction = (Vector3.new(-34.215824127197266, -30.940921783447266+15, 373.9881896972656) - ball.Position).unit
-		end    
-		-- Set the velocity of the sphere in the direction towards the target part
-		local speed = 150 -- Adjust this speed as needed
-		ball.Velocity = direction * speed
-		print('yay')
+	if plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Visible and autoAim and checkForBall() and UI then
+		aim()
 	else
 		plr.PlayerScripts:FindFirstChild("NoobGlitch").Enabled = true
 	end
