@@ -455,7 +455,7 @@ scoreGoal.MouseButton1Down:Connect(function()
 	scoreGoalFunction()
 end)
 
-game["Run Service"].RenderStepped:Connect(function()
+game["Run Service"].Heartbeat:Connect(function()
 	checkForBall()
 	reachingFunction()
 	glitchBallFunction()
