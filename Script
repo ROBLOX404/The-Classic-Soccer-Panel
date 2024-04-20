@@ -477,21 +477,22 @@ exitButton.MouseButton1Down:Connect(function()
 end)
 
 plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Changed:Connect(function()
-	if plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Visible and autoAim then
+	if plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Visible and autoAim and checkForBall() then
+		local ball = checkForBall()
 		plr.PlayerScripts:FindFirstChild("NoobGlitch").Enabled = false
 		local random = math.random(1,4)
 		local direction
 		if random == 1 then
-			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793, 372.3470153808594) - checkForBall().Position).unit
+			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793, 372.3470153808594) - ball.Position).unit
 		elseif random == 2 then
-			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793+15, 372.3470153808594) - checkForBall().Position).unit
+			direction = (Vector3.new(-2.5612926483154297, -30.97254753112793+15, 372.3470153808594) - ball.Position).unit
 		elseif random == 3 then
-			direction = (Vector3.new(-34.215824127197266, -30.940921783447266, 373.9881896972656) - checkForBall().Position).unit
+			direction = (Vector3.new(-34.215824127197266, -30.940921783447266, 373.9881896972656) - ball.Position).unit
 		elseif random == 4 then
-			direction = (Vector3.new(-34.215824127197266, -30.940921783447266+15, 373.9881896972656) - checkForBall().Position).unit
+			direction = (Vector3.new(-34.215824127197266, -30.940921783447266+15, 373.9881896972656) - ball.Position).unit
 		end    
 		-- Set the velocity of the sphere in the direction towards the target part
 		local speed = 150 -- Adjust this speed as needed
-		checkForBall().Velocity = direction * speed
+		ball.Velocity = direction * speed
 	end
 end)
