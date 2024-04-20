@@ -21,7 +21,7 @@ if plr.PlayerGui:FindFirstChild("Exploit board") then
 	plr.PlayerGui:FindFirstChild("Exploit board"):Destroy()
 end
 
-local UI = Instance.new("ScreenGui",game:GetService("StarterGui"))
+local UI = Instance.new("ScreenGui",plr.PlayerGui)
 UI.ResetOnSpawn = false
 UI.Name = "Exploit board"
 local UIHolder = Instance.new("Frame",UI)
