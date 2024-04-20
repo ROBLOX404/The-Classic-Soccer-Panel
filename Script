@@ -254,7 +254,6 @@ local function checkForBall()
 			bottomtext.Text = [[Ball is owned: ✅]]
 			return ball
 		else
-			getBall()
 			bottomtext.Text = [[Ball is owned: ❌]]
 		end
 	end
