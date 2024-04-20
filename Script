@@ -450,6 +450,7 @@ end)
 TPBall.MouseButton1Down:Connect(function()
 	local ball = checkForBall()
 	if ball then
+		print(ball)
 		plr.Character:SetPrimaryPartCFrame(CFrame.new(ball.Position+Vector3.new(0,5+2.5/2,0)))
 	end
 end)
