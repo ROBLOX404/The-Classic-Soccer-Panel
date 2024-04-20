@@ -445,7 +445,7 @@ local autoScore = createNewOption(controlTab,"Goal Farm Mode",false)
 
 local autoReach = createNewOption(silentTab,"AutoReach",false)
 local autoAim = createNewOption(silentTab,"AutoAim (WIP)",false)
-local autoReach = createNewOption(silentTab,"AutoCatch (WIP)",false)
+local autoCatch = createNewOption(silentTab,"AutoCatch (WIP)",false)
 
 TopBar.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -522,7 +522,6 @@ end)
 plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Changed:Connect(function()
 	if plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Visible and autoAimMode and checkForBall() then
 		aim()
-		print("a")
 	else
 		plr.PlayerScripts:FindFirstChild("NoobGlitch").Enabled = true
 	end
