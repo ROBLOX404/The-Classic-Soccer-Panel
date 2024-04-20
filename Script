@@ -226,6 +226,7 @@ local glitching = false
 local reaching = false
 local playerHasBall = false
 local autoAim = false
+local goalFarmMode = false
 
 local loop
 
@@ -303,6 +304,12 @@ local function scoreGoalFunction()
 		else
 			ball.Position = workspace.WorkspaceStadiumMap.Goal11.Position
 		end
+	end
+end
+
+local function autoScore()
+	if goalFarmMode then
+		scoreGoalFunction()
 	end
 end
 
@@ -443,7 +450,7 @@ end)
 TPBall.MouseButton1Down:Connect(function()
 	local ball = checkForBall()
 	if ball then
-		plr.Character:MoveTo(ball.Position)
+		plr.Character:SetPrimaryPartCFrame(CFrame.new(ball.Position+Vector3.new(0,5+2.5/2,0)))
 	end
 end)
 
@@ -465,10 +472,15 @@ scoreGoal.MouseButton1Down:Connect(function()
 	scoreGoalFunction()
 end)
 
+autoScore.MouseButton1Down:Connect(function()
+	goalFarmMode = not goalFarmMode
+end)
+
 loop = game["Run Service"].Heartbeat:Connect(function()
 	checkForBall()
 	reachingFunction()
 	glitchBallFunction()
+	autoScore()
 end)
 
 exitButton.MouseButton1Down:Connect(function()
@@ -477,6 +489,7 @@ exitButton.MouseButton1Down:Connect(function()
 end)
 
 plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Changed:Connect(function()
+	print("changed")
 	if plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Visible and autoAim and checkForBall() then
 		local ball = checkForBall()
 		plr.PlayerScripts:FindFirstChild("NoobGlitch").Enabled = false
