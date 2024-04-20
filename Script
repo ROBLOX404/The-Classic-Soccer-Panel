@@ -225,7 +225,7 @@ local startPos
 local glitching = false
 local reaching = false
 local playerHasBall = false
-local autoAim = false
+local autoAimMode = false
 local goalFarmMode = false
 
 local loop
@@ -495,7 +495,7 @@ autoReach.MouseButton1Down:Connect(function()
 end)
 
 autoAim.MouseButton1Down:Connect(function()
-	autoAim = not autoAim
+	autoAimMode = not autoAimMode
 end)
 
 scoreGoal.MouseButton1Down:Connect(function()
@@ -520,9 +520,9 @@ exitButton.MouseButton1Down:Connect(function()
 end)
 
 plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Changed:Connect(function()
-	print("changed")
-	if plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Visible and autoAim and checkForBall() and UI then
+	if plr.PlayerGui:WaitForChild("Start"):WaitForChild("PowerBar").Visible and autoAimMode and checkForBall() then
 		aim()
+		print("a")
 	else
 		plr.PlayerScripts:FindFirstChild("NoobGlitch").Enabled = true
 	end
